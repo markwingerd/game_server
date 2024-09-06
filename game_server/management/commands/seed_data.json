@@ -1,0 +1,35 @@
+{
+    "users": [
+        {"username": "public", "email": "none@none.com", "password": "password123"},
+        {"username": "reimus", "email": "none@none.com", "password": "password123"}
+    ],
+    "content_tags": [
+        {"name": "Test", "description": "Test Tag"}
+    ],
+    "event_templates": [
+        {"name": "Walk Aimlessly 1", "max_characters": 1, "max_enemies": 0, "content_tag": "Test", "event_texts": ["You walk around aimlessly while the world is being tested."]},
+        {"name": "Talk 1", "max_characters": 2, "max_enemies": 0, "content_tag": "Test", "event_texts": ["You talk with <<char1.short_desc>>.", "<<char0.Short_desc>> talks with you."]},
+        {"name": "Talk 2", "max_characters": 2, "max_enemies": 0, "content_tag": "Test", "event_texts": ["You are in a conversation with <<char1.short_desc>> and laugh at <<char1.his>> joke.",
+                                                                                                                "You tell a joke to <<char0.short_desc>> and <<he>> laughs at it."]},
+        {"name": "Overhear 1 ", "max_characters": 3, "max_enemies": 0, "content_tag": "Test", "event_texts": ["You walk past two people talking. The <<char1.short_desc>> tells the <<char2.short_desc>> about what <<he>> did yesterday.",
+                                                                                                                     "You talk to <<char2.short_desc>> about what you did yesterday and notice <<char0.short_desc>> walk by.",
+                                                                                                                     "<<char1.Short_desc>> tells you about what <<he>> did yesterday while <<char0.short_desc>> listens in."]}
+    ],
+    "monsters": [
+        {"name": "Goblin", "description": "A sneaky goblin", "hp_max": 60, "hp": 45, "attack": 10, "defense": 5},
+        {"name": "Troll", "description": "A fearsome troll", "hp_max": 100, "hp": 85, "attack": 15, "defense": 10}
+    ],
+    "characters": [
+        {"user": "reimus", "first_name": "Reimus", "last_name": "Klinsman", "age": 40, "sex": "M", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
+        {"user": "public", "first_name": "Katie", "last_name": "Kennedy", "age": 18, "sex": "F", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
+        {"user": "public", "first_name": "Harper", "last_name": "Parker", "age": 22, "sex": "F", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
+        {"user": "public", "first_name": "Glenn", "last_name": "May", "age": 28, "sex": "M", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
+        {"user": "public", "first_name": "Sidney", "last_name": "Grant", "age": 19, "sex": "F", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
+        {"user": "public", "first_name": "Reed", "last_name": "Khan", "age": 21, "sex": "M", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
+        {"user": "public", "first_name": "Chris", "last_name": "May", "age": 44, "sex": "M", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
+        {"user": "public", "first_name": "Terry", "last_name": "Banks", "age": 23, "sex": "M", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
+        {"user": "public", "first_name": "Ali", "last_name": "Murray", "age": 25, "sex": "F", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
+        {"user": "public", "first_name": "Gail", "last_name": "Park", "age": 36, "sex": "F", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
+        {"user": "public", "first_name": "Ray", "last_name": "Pittman", "age": 42, "sex": "M", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12}
+    ]
+}
