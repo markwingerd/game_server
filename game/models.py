@@ -8,8 +8,26 @@ class Event(models.Model):
     monsters = models.ManyToManyField('Monster', related_name='events', blank=True)
     tick_count = models.IntegerField()
 
+    changes = models.JSONField(default=list)
+
     def __str__(self):
         return f'Event: {self.template.name}'
+    
+    def record_change(self, character, change_details):
+        """
+        Records the changes made to a character during the event.
+        """
+        self.changes.append({
+            "character_id": character.id,
+            "change_details": change_details
+        })
+        self.save()
+
+    def get_character_changes(self, character):
+        """
+        Retrieves all recorded changes for a specific character.
+        """
+        return [change for change in self.changes if change['character_id'] == character.id]
 
 class Character(models.Model):
     MALE = 'M'
@@ -97,9 +115,20 @@ class EventTemplate(models.Model):
         character = event.character[0]
         opponent = event.characters[1]
         damage_dealt = int(character.strength * attack_multiplier / opponent.defense)
+        opponent_init_hp = opponent.hp
         opponent.hp = max(0, opponent.hp - damage_dealt)
+
         character.save()
         opponent.save()
+
+        event.record_change(character, {"action": "fight"})
+        event.record_change(opponent, {
+            "action": "fight",
+            "initial_hp": opponent_init_hp,
+            "final_hp": opponent.hp,
+        })
+        # TODO: Fights might be too long, I wonder if I should have something that speeds
+        #       this up and makes one event a whole fight.
         # TODO: if character has died, try triggering a death event on this tick
         # TODO: It'd be nice to add a report json for the FE to display
 
@@ -108,23 +137,51 @@ class EventTemplate(models.Model):
         A social event function that increases social points.
         """
         for character in event.characters.all():
+            character_init_social = character.social
             character.social = max(0, min(1000, character.social + social_points))
             character.save()
 
+            event.record_change(character, {
+                "action": "social",
+                "initial_social": character_init_social,
+                "final_social": character.social,
+            })
+
     def eat(self, event, food_points, **kwargs):
         for character in event.characters.all():
+            character_init_food = character.food
             character.food = max(0, min(1000, character.food + food_points))
             character.save()
 
+            event.record_change(character, {
+                "action": "eat",
+                "initial_food": character_init_food,
+                "final_food": character.food,
+            })
+
     def rest(self, event, rest_points, **kwargs):
         for character in event.characters.all():
+            character_init_rest = character.rest
             character.rest = max(0, min(1000, character.rest + rest_points))
             character.save()
 
+            event.record_change(character, {
+                "action": "rest",
+                "initial_rest": character_init_rest,
+                "final_rest": character.rest,
+            })
+
     def work(self, event, work_points, **kwargs):
         for character in event.characters.all():
+            character_init_rest = character.rest
             character.rest = max(0, min(1000, character.rest - work_points))
             character.save()
+
+            event.record_change(character, {
+                "action": "work",
+                "initial_rest": character_init_rest,
+                "final_rest": character.rest,
+            })
 
 class ContentTag(models.Model):
     name = models.CharField(max_length=50)
