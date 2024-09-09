@@ -71,8 +71,60 @@ class EventTemplate(models.Model):
     max_enemies = models.PositiveIntegerField(default=1)
     content_tags = models.ManyToManyField('ContentTag', related_name='event_templates')
 
+    event_function = models.CharField(max_length=100, blank=True, null=True)
+    event_kwargs = models.JSONField(default=dict, blank=True, null=True)
+
     def __str__(self):
         return self.name
+    
+    def execute_event_function(self, event):
+        """
+        This will call the function stored in 'event_function' with optional arguments
+        and apply it to each character in the event.
+        """
+        if self.event_function:
+            func = getattr(self, self.event_function, None)
+            print(func)
+            if func:
+                func(event, **self.event_kwargs)
+
+    def fight(self, event, character, attack_multiplier=1, **kwargs):
+        """
+        event:
+        character: Aggressor
+        opponent: Damage taker
+        """
+        character = event.character[0]
+        opponent = event.characters[1]
+        damage_dealt = int(character.strength * attack_multiplier / opponent.defense)
+        opponent.hp = max(0, opponent.hp - damage_dealt)
+        character.save()
+        opponent.save()
+        # TODO: if character has died, try triggering a death event on this tick
+        # TODO: It'd be nice to add a report json for the FE to display
+
+    def social(self, event, social_points=50, **kwargs):
+        """
+        A social event function that increases social points.
+        """
+        for character in event.characters.all():
+            character.social = max(0, min(1000, character.social + social_points))
+            character.save()
+
+    def eat(self, event, food_points, **kwargs):
+        for character in event.characters.all():
+            character.food = max(0, min(1000, character.food + food_points))
+            character.save()
+
+    def rest(self, event, rest_points, **kwargs):
+        for character in event.characters.all():
+            character.rest = max(0, min(1000, character.rest + rest_points))
+            character.save()
+
+    def work(self, event, work_points, **kwargs):
+        for character in event.characters.all():
+            character.rest = max(0, min(1000, character.rest - work_points))
+            character.save()
 
 class ContentTag(models.Model):
     name = models.CharField(max_length=50)

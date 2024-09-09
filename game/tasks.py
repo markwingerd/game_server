@@ -71,11 +71,8 @@ def handle_events(character, characters, current_tick):
     # print(f"characters {len(characters)} {characters}")
     # print(f"available_characters {available_characters}")
     available_characters = []
-    print(f"    characters {len(characters)} {characters}")
     for _ in range(remaining_character_slots):
         available_characters.append(characters.pop())
-    print(f"    characters {len(characters)} {characters}")
-    print(f"    available_characters {available_characters}")
         
     for extra_character in available_characters:
         event.characters.add(extra_character)
@@ -88,6 +85,7 @@ def handle_events(character, characters, current_tick):
     for monster in available_monsters:
         event.monsters.add(monster)
 
+    event_template.execute_event_function(event)
     event.save()
     character.events.add(event)
     character.save()
