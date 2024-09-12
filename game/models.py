@@ -8,7 +8,7 @@ class Event(models.Model):
     monsters = models.ManyToManyField('Monster', related_name='events', blank=True)
     tick_count = models.IntegerField()
 
-    changes = models.JSONField(default=list)
+    changes = models.JSONField(default=dict)
 
     def __str__(self):
         return f'Event: {self.template.name}'
@@ -17,10 +17,10 @@ class Event(models.Model):
         """
         Records the changes made to a character during the event.
         """
-        self.changes.append({
-            "character_id": character.id,
-            "change_details": change_details
-        })
+        try:
+            self.changes[character.id].append(change_details)
+        except KeyError:
+            self.changes[character.id] = [change_details]
         self.save()
 
     def get_character_changes(self, character):
@@ -102,7 +102,6 @@ class EventTemplate(models.Model):
         """
         if self.event_function:
             func = getattr(self, self.event_function, None)
-            print(func)
             if func:
                 func(event, **self.event_kwargs)
 
@@ -123,7 +122,7 @@ class EventTemplate(models.Model):
 
         event.record_change(character, {"action": "fight"})
         event.record_change(opponent, {
-            "action": "fight",
+            "attribute": "hp",
             "initial_hp": opponent_init_hp,
             "final_hp": opponent.hp,
         })
@@ -142,7 +141,7 @@ class EventTemplate(models.Model):
             character.save()
 
             event.record_change(character, {
-                "action": "social",
+                "attribute": "social",
                 "initial_social": character_init_social,
                 "final_social": character.social,
             })
@@ -154,7 +153,7 @@ class EventTemplate(models.Model):
             character.save()
 
             event.record_change(character, {
-                "action": "eat",
+                "attribute": "food",
                 "initial_food": character_init_food,
                 "final_food": character.food,
             })
@@ -166,7 +165,7 @@ class EventTemplate(models.Model):
             character.save()
 
             event.record_change(character, {
-                "action": "rest",
+                "attribute": "rest",
                 "initial_rest": character_init_rest,
                 "final_rest": character.rest,
             })
@@ -178,7 +177,7 @@ class EventTemplate(models.Model):
             character.save()
 
             event.record_change(character, {
-                "action": "work",
+                "attribute": "rest",
                 "initial_rest": character_init_rest,
                 "final_rest": character.rest,
             })

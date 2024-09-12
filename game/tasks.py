@@ -52,7 +52,7 @@ def handle_events(character, characters, current_tick):
     characters: A pool of characters that dont have events applied to them
     current_tick: the current tick of the game
     """
-    print(f"CHARACTER {character}")
+    # print(f"CHARACTER {character}")
     # Step 3: Select a random EventTemplate
     event_template = EventTemplate.objects.filter(max_characters__lte=len(characters)+1).order_by('?').first()
     if not event_template:
