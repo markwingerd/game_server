@@ -1,3 +1,5 @@
+import random
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -55,13 +57,31 @@ class Character(models.Model):
     
     rest = models.IntegerField(default=1000, validators=[MinValueValidator(0), MaxValueValidator(1000)])
     food = models.IntegerField(default=1000, validators=[MinValueValidator(0), MaxValueValidator(1000)])
-    social = models.IntegerField(default=1000, validators=[MinValueValidator(0), MaxValueValidator(1000)])  # New social attribute
+    social = models.IntegerField(default=1000, validators=[MinValueValidator(0), MaxValueValidator(1000)])
+
+    relationships = models.ManyToManyField('self', through='CharacterRelationship', symmetrical=False)
 
     def current_event(self):
         return self.events.last()
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+
+class CharacterRelationship(models.Model):
+    """ This scales poorly """
+    from_character = models.ForeignKey(Character, related_name='from_relationships', on_delete=models.CASCADE)
+    to_character = models.ForeignKey(Character, related_name='to_relationships', on_delete=models.CASCADE)
+    
+    friendship_rivalry = models.IntegerField(default=0, validators=[MinValueValidator(-100), MaxValueValidator(100)])  # Range could be 0 to 100 or -100 to 100 depending on preference
+    knows_about = models.JSONField(default=dict)
+
+    class Meta:
+        unique_together = ('from_character', 'to_character')
+
+    def __str__(self):
+        return f"{self.from_character.first_name} -> {self.to_character.first_name} (friendship/rivalry: {self.friendship_rivalry})"
+
 
 class Monster(models.Model):
     name = models.CharField(max_length=100)
@@ -91,6 +111,7 @@ class EventTemplate(models.Model):
 
     event_function = models.CharField(max_length=100, blank=True, null=True)
     event_kwargs = models.JSONField(default=dict, blank=True, null=True)
+    social_effects = models.JSONField(default=list)
 
     def __str__(self):
         return self.name
@@ -104,6 +125,22 @@ class EventTemplate(models.Model):
             func = getattr(self, self.event_function, None)
             if func:
                 func(event, **self.event_kwargs)
+
+        self.execute_social_effects(event)
+
+    def execute_social_effects(self, event):
+        characters = event.characters.all()
+        for effects, this_character in zip(self.social_effects, characters):
+            for effect, other_character in zip(effects, characters):
+                if not effect or this_character == other_character:
+                    continue
+                relationship, _ = CharacterRelationship.objects.get_or_create(from_character=this_character, to_character=other_character)
+                relationship.friendship_rivalry += effect
+
+                if random.randint(0, 100) <= abs(relationship.friendship_rivalry / 10):
+                    relationship.knows_about["name"] = True
+
+                relationship.save()
 
     def fight(self, event, character, attack_multiplier=1, **kwargs):
         """

@@ -66,6 +66,7 @@ class Command(BaseCommand):
                 event_texts=template_data['event_texts'],
                 event_function=template_data['event_function'],
                 event_kwargs=template_data['event_kwargs'],
+                social_effects=template_data['social_effects'],
             )
             template.content_tags.add(self.tags[template_data['content_tag']])
             self.templates.append(template)

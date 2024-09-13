@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Character, EventTemplate, Event, Monster, ContentTag
+from .models import Character, EventTemplate, Event, Monster, ContentTag, CharacterRelationship
 
 class CharacterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,3 +31,10 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = '__all__'
+
+class CharacterRelationshipSerializer(serializers.ModelSerializer):
+    to_character_name = serializers.CharField(source='to_character.first_name', read_only=True)
+
+    class Meta:
+        model = CharacterRelationship
+        fields = ['id', 'to_character', 'to_character_name', 'friendship_rivalry', 'knows_about']

@@ -20,7 +20,8 @@
                 "You walk around aimlessly while the world is being tested."
             ],
             "event_function": null,
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": []
         }, {
             "name": "Talk 1",
             "max_characters": 2,
@@ -31,7 +32,8 @@
                 "<<char0.Short_desc>> talks with you."
             ],
             "event_function": "social",
-            "event_kwargs": {"social_points": 10}
+            "event_kwargs": {"social_points": 10},
+            "social_effects": [[0,1], [1,0]]
         }, {
             "name": "Talk 2",
             "max_characters": 2,
@@ -42,7 +44,8 @@
                 "You tell a joke to <<char0.short_desc>> and <<he>> laughs at it."
             ],
             "event_function": "social",
-            "event_kwargs": {"social_points": 30}
+            "event_kwargs": {"social_points": 30},
+            "social_effects": [[0,2], [2,0]]
         }, {
             "name": "Overhear 1",
             "max_characters": 3,
@@ -54,7 +57,8 @@
                 "<<char1.Short_desc>> tells you about what <<he>> did yesterday while <<char0.short_desc>> listens in."
             ],
             "event_function": "social",
-            "event_kwargs": {"social_points": 80}
+            "event_kwargs": {"social_points": 80},
+            "social_effects": [[0,1,1], [0,0,1], [0,1,0]]
         }, {
             "name": "Overhear 2",
             "max_characters": 3,
@@ -66,7 +70,8 @@
                 "While walking down the path you see a nearby fenced in yard with a chicken you lost a few days ago. You hop the fence to take it back when <<char1.short_desc>> approaches you and starts yelling at you that you are stealing <<char1.his>> chicken. \"You’re lying! I raised that chicken from a chick!\" you retort, unwilling to let this matter slide."
             ],
             "event_function": "social",
-            "event_kwargs": {"social_points": 80}
+            "event_kwargs": {"social_points": 80},
+            "social_effects": [[0,-1,-1], [0,0,-3], [0,-3,0]]
         }, {
             "name": "Foraging 1",
             "max_characters": 1,
@@ -76,7 +81,8 @@
                 "You run low on supplies so you walk to the forest and start foraging for food."
             ],
             "event_function": null,
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": []
         }, {
             "name": "Foraging 2",
             "max_characters": 1,
@@ -86,7 +92,8 @@
                 "While foraging for food you find plenty for berries and fruit."
             ],
             "event_function": null,
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": []
         }, {
             "name": "Foraging 3",
             "max_characters": 2,
@@ -97,7 +104,8 @@
                 "While hunting you run into <<char0.short_desc>> and share some of your bounty with <<char0.him>>."
             ],
             "event_function": null,
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": [[0,3], [1,0]]
         }, {
             "name": "Hunting 1",
             "max_characters": 1,
@@ -107,7 +115,8 @@
                 "You decide to go out hunting."
             ],
             "event_function": null,
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": []
         }, {
             "name": "Hunting 2",
             "max_characters": 1,
@@ -117,7 +126,8 @@
                 "On your hunting trip you kill a boar"
             ],
             "event_function": null,
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": []
         }, {
             "name": "Hunting 3",
             "max_characters": 1,
@@ -127,7 +137,8 @@
                 "You find an kill a deer."
             ],
             "event_function": null,
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": []
         }, {
             "name": "Snack 1",
             "max_characters": 1,
@@ -137,7 +148,8 @@
                 "You decide to eat a snack."
             ],
             "event_function": "eat",
-            "event_kwargs": {"food_points": 20}
+            "event_kwargs": {"food_points": 20},
+            "social_effects": []
         }, {
             "name": "Snack 2",
             "max_characters": 1,
@@ -147,7 +159,8 @@
                 "You eat a meal."
             ],
             "event_function": "eat",
-            "event_kwargs": {"food_points": 80}
+            "event_kwargs": {"food_points": 80},
+            "social_effects": []
         }, {
             "name": "Rest 1",
             "max_characters": 1,
@@ -157,7 +170,8 @@
                 "You lay down for a while."
             ],
             "event_function": "rest",
-            "event_kwargs": {"rest_points": 100}
+            "event_kwargs": {"rest_points": 100},
+            "social_effects": []
         }, {
             "name": "Rest 2",
             "max_characters": 1,
@@ -167,7 +181,8 @@
                 "You lay down to sleep."
             ],
             "event_function": "rest",
-            "event_kwargs": {"rest_points": 100}
+            "event_kwargs": {"rest_points": 100},
+            "social_effects": []
         }, {
             "name": "Rest 3",
             "max_characters": 1,
@@ -177,7 +192,8 @@
                 "You dream of electric sheep."
             ],
             "event_function": "rest",
-            "event_kwargs": {"rest_points": 90}
+            "event_kwargs": {"rest_points": 90},
+            "social_effects": []
         }, {
             "name": "Weird 1",
             "max_characters": 2,
@@ -188,7 +204,8 @@
                 "You dream about chocolate clouds."
             ],
             "event_function": "rest",
-            "event_kwargs": {"rest_points": 90}
+            "event_kwargs": {"rest_points": 90},
+            "social_effects": [[0,-1], [0,0]]
         }, {
             "name": "Weird 2",
             "max_characters": 1,
@@ -198,7 +215,8 @@
                 "A violent storm batters the village. You huddle inside, listening to the wind howl, hoping your roof holds through the night."
             ],
             "event_function": "",
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": []
         }, {
             "name": "Weird 3",
             "max_characters": 1,
@@ -208,7 +226,8 @@
                 "As the storm rages, you check your shutters. The wind is fierce tonight, and you wonder if your neighbor is faring as well."
             ],
             "event_function": "",
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": []
         }, {
             "name": "Market 1",
             "max_characters": 1,
@@ -218,7 +237,8 @@
                 "You arrive at the village market just as the sun rises, the smell of fresh bread and herbs filling the air. You decide to purchase some wheat flour for the week ahead."
             ],
             "event_function": null,
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": []
         }, {
             "name": "Market 2",
             "max_characters": 2,
@@ -229,7 +249,8 @@
                 "You spot <<char0.short_desc>> who’s been eyeing you. It’s time to try to sell some rare herbs you found."
             ],
             "event_function": null,
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": [[0,1], [1,0]]
         }, {
             "name": "Market 3",
             "max_characters": 2,
@@ -240,7 +261,8 @@
                 "You make your way through the village, offering trinkets and baubles to the curious villagers. <<char0.short_desc>> seems particularly interested in your wares."
             ],
             "event_function": null,
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": [[0,1], [1,0]]
         }, {
             "name": "Chores 1",
             "max_characters": 2,
@@ -251,7 +273,8 @@
                 "You watch from the other side of your field as your neighbor struggles to mend their fence. You wonder if you should offer help or stay focused on your own chores."
             ],
             "event_function": "work",
-            "event_kwargs": {"work_points": 75}
+            "event_kwargs": {"work_points": 75},
+            "social_effects": [[], [1,0]]
         }, {
             "name": "Chores 2",
             "max_characters": 1,
@@ -261,7 +284,8 @@
                 "The village elder has asked for help in the fields. You grab your hoe and head out, ready for a hard day's work."
             ],
             "event_function": "work",
-            "event_kwargs": {"work_points": 25}
+            "event_kwargs": {"work_points": 25},
+            "social_effects": []
         }, {
             "name": "Chores 4",
             "max_characters": 1,
@@ -271,7 +295,8 @@
                 "You survey the group of villagers who have come to help. Among them, you see the young one who is always willing to lend a hand."
             ],
             "event_function": "work",
-            "event_kwargs": {"work_points": 25}
+            "event_kwargs": {"work_points": 25},
+            "social_effects": []
         }, {
             "name": "Chores 5",
             "max_characters": 2,
@@ -282,7 +307,8 @@
                 "Another villager arrives with grain. You smile, but your hands are sore from the long hours, and you silently hope for a day off."
             ],
             "event_function": "work",
-            "event_kwargs": {"work_points": 65}
+            "event_kwargs": {"work_points": 65},
+            "social_effects": [[0,1], [1,0]]
         }, {
             "name": "Fun 1",
             "max_characters": 2,
@@ -293,7 +319,8 @@
                 "You twirl through the crowd, linking arms with the villagers. Among them, <<char0.short_desc>> seems a little hesitant but soon falls into the rhythm of the dance."
             ],
             "event_function": "",
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": [[0,3], [3,0]]
         }, {
             "name": "Bad 1",
             "max_characters": 3,
@@ -305,7 +332,8 @@
                 "You meet up with a friend of yours late at night like they asked in a note they sent to you. <<He>> explains how some farming equipment was stolen from <<him>> and <<he>> wants your help to get it back. You'd rather not do this as getting caught could lead to your reputation in the village being tarnished. You ask <<him>> in a hushed voice, \"Are you sure this will work?\""
             ],
             "event_function": "",
-            "event_kwargs": {}
+            "event_kwargs": {},
+            "social_effects": [[0,-3,-3], [0, 0, 1], [0, -1, 0]]
         }
     ],
     "monsters": [
