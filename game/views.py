@@ -1,19 +1,33 @@
+from django.contrib.auth.models import User
 from django.db.models import F
 from django.db.models.functions import Abs
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .models import Character, EventTemplate, Event, Monster, ContentTag, CharacterRelationship
-from .serializers import CharacterSerializer, EventTemplateSerializer, EventSerializer, MonsterSerializer, ContentTagSerializer, CharacterRelationshipSerializer
+from .serializers import CharacterSerializer, EventTemplateSerializer, EventSerializer, MonsterSerializer, ContentTagSerializer, CharacterRelationshipSerializer, RegisterSerializer
 
 class CharacterViewSet(viewsets.ModelViewSet):
     queryset = Character.objects.all()
     serializer_class = CharacterSerializer
 
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated:
+            return Character.objects.filter(user=user) | Character.objects.filter(user__username='public')
+        else:
+            return Character.objects.filter(user__username='public')
+
     @action(detail=True, methods=['get'], url_path='events')
     def events(self, request, pk=None):
         character = self.get_object()
+        if character.user != request.user and character.user.username != 'public':
+            return Response({"detail": "Not authorized to view this character's events."}, status=403)
+
         events = character.events.all().order_by('-id')
 
         # Paginate the events
@@ -26,6 +40,9 @@ class CharacterViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['get'], url_path='relationships')
     def relationships(self, request, pk=None):
         character = self.get_object()
+        if character.user != request.user and character.user.username != 'public':
+            return Response({"detail": "Not authorized to view this character's relationships."}, status=403)
+
         relationships = CharacterRelationship.objects.filter(from_character=character).annotate(
             abs_friendship_rivalry=Abs(F('friendship_rivalry'))
         ).order_by('-abs_friendship_rivalry')
@@ -57,5 +74,15 @@ class ContentTagViewSet(viewsets.ModelViewSet):
     queryset = ContentTag.objects.all()
     serializer_class = ContentTagSerializer
 
+
+class RegisterView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = RegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
