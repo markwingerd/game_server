@@ -9,18 +9,41 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Character, EventTemplate, Event, Monster, ContentTag, CharacterRelationship
+from .permissions import IsAuthenticatedOrReadOnly
 from .serializers import CharacterSerializer, EventTemplateSerializer, EventSerializer, MonsterSerializer, ContentTagSerializer, CharacterRelationshipSerializer, RegisterSerializer
 
 class CharacterViewSet(viewsets.ModelViewSet):
-    queryset = Character.objects.all()
     serializer_class = CharacterSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         user = self.request.user
-        if user.is_authenticated:
-            return Character.objects.filter(user=user) | Character.objects.filter(user__username='public')
+        accessible = self.request.query_params.get('accessible', None)
+        
+        if accessible:
+            if user.is_authenticated:
+                user_owned = Character.objects.filter(user=user).order_by('-id')
+                public_owned = Character.objects.filter(user__username='public')
+                queryset = user_owned | public_owned
+            else:
+                queryset = Character.objects.filter(user__username='public')
+            return queryset
+
+        return Character.objects.all()
+    
+    def perform_create(self, serializer):
+        # Associate the character with the logged-in user
+        serializer.save(user=self.request.user)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            self.perform_create(serializer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            return Character.objects.filter(user__username='public')
+            # Return detailed error messages if validation fails
+            print(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=True, methods=['get'], url_path='events')
     def events(self, request, pk=None):
@@ -32,7 +55,7 @@ class CharacterViewSet(viewsets.ModelViewSet):
 
         # Paginate the events
         paginator = PageNumberPagination()
-        paginator.page_size = 10  # You can adjust the page size
+        # paginator.page_size = 10  # You can adjust the page size
         paginated_events = paginator.paginate_queryset(events, request)
         serializer = EventSerializer(paginated_events, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -84,5 +107,3 @@ class RegisterView(APIView):
             serializer.save()
             return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    

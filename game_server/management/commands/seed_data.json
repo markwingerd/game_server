@@ -28,8 +28,8 @@
             "max_enemies": 0,
             "content_tag": "social",
             "event_texts": [
-                "You talk with <<char1.short_desc>>.",
-                "<<char0.Short_desc>> talks with you."
+                "You talk with <<char1.name_or_short_desc>>.",
+                "<<char0.Name_or_short_desc>> talks with you."
             ],
             "event_function": "social",
             "event_kwargs": {"social_points": 10},
@@ -40,8 +40,8 @@
             "max_enemies": 0,
             "content_tag": "social",
             "event_texts": [
-                "You are in a conversation with <<char1.short_desc>> and laugh at <<char1.his>> joke.",
-                "You tell a joke to <<char0.short_desc>> and <<he>> laughs at it."
+                "You are in a conversation with <<char1.name_or_short_desc>> and laugh at <<char1.his>> joke.",
+                "You tell a joke to <<char0.name_or_short_desc>> and <<he>> laughs at it."
             ],
             "event_function": "social",
             "event_kwargs": {"social_points": 30},
@@ -52,9 +52,9 @@
             "max_enemies": 0,
             "content_tag": "social",
             "event_texts": [
-                "You walk past two people talking. The <<char1.short_desc>> tells the <<char2.short_desc>> about what <<he>> did yesterday.",
-                "You talk to <<char2.short_desc>> about what you did yesterday and notice <<char0.short_desc>> walk by.",
-                "<<char1.Short_desc>> tells you about what <<he>> did yesterday while <<char0.short_desc>> listens in."
+                "You walk past two people talking. The <<char1.name_or_short_desc>> tells the <<char2.name_or_short_desc>> about what <<he>> did yesterday.",
+                "You talk to <<char2.name_or_short_desc>> about what you did yesterday and notice <<char0.name_or_short_desc>> walk by.",
+                "<<char1.Name_or_short_desc>> tells you about what <<he>> did yesterday while <<char0.name_or_short_desc>> listens in."
             ],
             "event_function": "social",
             "event_kwargs": {"social_points": 80},
@@ -66,8 +66,8 @@
             "content_tag": "social",
             "event_texts": [
                 "You overhear an argument at the village square. Two villagers are shouting over a stolen chicken. You consider whether to intervene or keep walking.",
-                "You see <<char2.short_desc>> walking away from your yard with a chicken you recently purchased. \"That was my chicken!\" you yell, your voice cracking as frustration grows.",
-                "While walking down the path you see a nearby fenced in yard with a chicken you lost a few days ago. You hop the fence to take it back when <<char1.short_desc>> approaches you and starts yelling at you that you are stealing <<char1.his>> chicken. \"You’re lying! I raised that chicken from a chick!\" you retort, unwilling to let this matter slide."
+                "You see <<char2.name_or_short_desc>> walking away from your yard with a chicken you recently purchased. \"That was my chicken!\" you yell, your voice cracking as frustration grows.",
+                "While walking down the path you see a nearby fenced in yard with a chicken you lost a few days ago. You hop the fence to take it back when <<char1.name_or_short_desc>> approaches you and starts yelling at you that you are stealing <<char1.his>> chicken. \"You’re lying! I raised that chicken from a chick!\" you retort, unwilling to let this matter slide."
             ],
             "event_function": "social",
             "event_kwargs": {"social_points": 80},
@@ -101,7 +101,7 @@
             "content_tag": "NA",
             "event_texts": [
                 "Part way through your foraging expedition you run into a hunter who shares some of <<char1.his>> bounty with you.",
-                "While hunting you run into <<char0.short_desc>> and share some of your bounty with <<char0.him>>."
+                "While hunting you run into <<char0.name_or_short_desc>> and share some of your bounty with <<char0.him>>."
             ],
             "event_function": null,
             "event_kwargs": {},
@@ -134,7 +134,7 @@
             "max_enemies": 0,
             "content_tag": "NA",
             "event_texts": [
-                "You find an kill a deer."
+                "You find and kill a deer."
             ],
             "event_function": null,
             "event_kwargs": {},
@@ -200,7 +200,7 @@
             "max_enemies": 0,
             "content_tag": "NA",
             "event_texts": [
-                "You walk along a pathway and find a <<char1.short_desc>> sleeping in a bush.",
+                "You walk along a pathway and find <<char1.name_or_short_desc>> sleeping in a bush.",
                 "You dream about chocolate clouds."
             ],
             "event_function": "rest",
@@ -245,8 +245,8 @@
             "max_enemies": 0,
             "content_tag": "shopping",
             "event_texts": [
-                "In the alley behind the market, <<char1.short_desc>> offers you a rare herb. The price is steep, but it could be valuable for your garden.",
-                "You spot <<char0.short_desc>> who’s been eyeing you. It’s time to try to sell some rare herbs you found."
+                "In the alley behind the market, <<char1.name_or_short_desc>> offers you a rare herb. The price is steep, but it could be valuable for your garden.",
+                "You spot <<char0.name_or_short_desc>> who’s been eyeing you. It’s time to try to sell some rare herbs you found."
             ],
             "event_function": null,
             "event_kwargs": {},
@@ -258,7 +258,7 @@
             "content_tag": "shopping",
             "event_texts": [
                 "A mysterious traveler arrives in the village, selling strange items from distant lands. You are tempted to buy a small amulet said to bring good fortune.",
-                "You make your way through the village, offering trinkets and baubles to the curious villagers. <<char0.short_desc>> seems particularly interested in your wares."
+                "You make your way through the village, offering trinkets and baubles to the curious villagers. <<char0.name_or_short_desc>> seems particularly interested in your wares."
             ],
             "event_function": null,
             "event_kwargs": {},
@@ -303,8 +303,8 @@
             "max_enemies": 0,
             "content_tag": "NA",
             "event_texts": [
-                "You bring sacks of grain to the village mill, waiting as the giant stone wheels grind them into flour. The miller leans against the wall with <<his>> head hanging low. <<He>> looks tired, as usual.",
-                "Another villager arrives with grain. You smile, but your hands are sore from the long hours, and you silently hope for a day off."
+                "You bring sacks of grain to the village mill, waiting as the giant stone wheels grind them into flour. The miller leans against the wall with <<char1.his>> head hanging low. <<He>> looks tired, as usual.",
+                "Another villager arrives with grain. You smile at <<char0.him>>, but your hands are sore from the long hours, and you silently hope for a day off."
             ],
             "event_function": "work",
             "event_kwargs": {"work_points": 65},
@@ -315,8 +315,8 @@
             "max_enemies": 0,
             "content_tag": "NA",
             "event_texts": [
-                "The village is alive with music and celebration. You find yourself swept into a dance with the others, the flicker of bonfires lighting the night. Your eyes meet those of <<char1.short_desc>> as <<he>> smiles at you as you begin to dance together.",
-                "You twirl through the crowd, linking arms with the villagers. Among them, <<char0.short_desc>> seems a little hesitant but soon falls into the rhythm of the dance."
+                "The village is alive with music and celebration. You find yourself swept into a dance with the others, the flicker of bonfires lighting the night. Your eyes meet those of <<char1.name_or_short_desc>> as <<he>> smiles at you as you begin to dance together.",
+                "You twirl through the crowd, linking arms with the villagers. Among them, <<char0.name_or_short_desc>> seems a little hesitant but soon falls into the rhythm of the dance."
             ],
             "event_function": "",
             "event_kwargs": {},
@@ -327,9 +327,9 @@
             "max_enemies": 0,
             "content_tag": "NA",
             "event_texts": [
-                "Late at night, you overhear a conversation between two villagers plotting something in secret. <<char1.Short_desc>> is waving <<his>> hands frantically. You can’t make out all the words, but <<his>> tone is ominous.",
-                "You sneak out to meet a friend of yours who agreed to help you steal back some farming equipment you are sure was stolen from you. As you explain the plan to <<him>>, <<he>> shows uncertainty in the plan and asks if you think it will work. \"It has to. There’s no other way,\" you reply, determined to see the plan through.",
-                "You meet up with a friend of yours late at night like they asked in a note they sent to you. <<He>> explains how some farming equipment was stolen from <<him>> and <<he>> wants your help to get it back. You'd rather not do this as getting caught could lead to your reputation in the village being tarnished. You ask <<him>> in a hushed voice, \"Are you sure this will work?\""
+                "Late at night, you overhear a conversation between two villagers plotting something in secret. <<char1.Name_or_short_desc>> is waving <<his>> hands frantically. You can’t make out all the words, but <<his>> tone is ominous.",
+                "You sneak out to meet a friend of yours who agreed to help you steal back some farming equipment you are sure was stolen from you. As you explain the plan to <<char2.him>>, <<he>> shows uncertainty in the plan and asks if you think it will work. \"It has to. There’s no other way,\" you reply, determined to see the plan through.",
+                "You meet up with a friend of yours late at night like they asked in a note they sent to you. <<char1.He>> explains how some farming equipment was stolen from <<him>> and <<he>> wants your help to get it back. You'd rather not do this as getting caught could lead to your reputation in the village being tarnished. You ask <<him>> in a hushed voice, \"Are you sure this will work?\""
             ],
             "event_function": "",
             "event_kwargs": {},
@@ -341,16 +341,149 @@
         {"name": "Troll", "description": "A fearsome troll", "hp_max": 100, "hp": 85, "attack": 15, "defense": 10}
     ],
     "characters": [
-        {"user": "reimus", "first_name": "Reimus", "last_name": "Klinsman", "age": 40, "sex": "M", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
-        {"user": "public", "first_name": "Katie", "last_name": "Kennedy", "age": 18, "sex": "F", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
-        {"user": "public", "first_name": "Harper", "last_name": "Parker", "age": 22, "sex": "F", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
-        {"user": "public", "first_name": "Glenn", "last_name": "May", "age": 28, "sex": "M", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
-        {"user": "public", "first_name": "Sidney", "last_name": "Grant", "age": 19, "sex": "F", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
-        {"user": "public", "first_name": "Reed", "last_name": "Khan", "age": 21, "sex": "M", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
-        {"user": "public", "first_name": "Chris", "last_name": "May", "age": 44, "sex": "M", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
-        {"user": "public", "first_name": "Terry", "last_name": "Banks", "age": 23, "sex": "M", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
-        {"user": "public", "first_name": "Ali", "last_name": "Murray", "age": 25, "sex": "F", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
-        {"user": "public", "first_name": "Gail", "last_name": "Park", "age": 36, "sex": "F", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12},
-        {"user": "public", "first_name": "Ray", "last_name": "Pittman", "age": 42, "sex": "M", "hp_max": 100, "hp": 100, "attack": 15, "defense": 12}
+        {
+            "user": "reimus",
+            "first_name": "Reimus",
+            "last_name": "Klinsman",
+            "age": 40,
+            "sex": "M",
+            "height": 70,
+            "weight": 20,
+            "muscles": 60,
+            "hp_max": 100,
+            "hp": 100,
+            "attack": 15,
+            "defense": 12},
+        {
+            "user": "public",
+            "first_name": "Katie",
+            "last_name": "Kennedy",
+            "age": 18,
+            "sex": "F",
+            "height": 10,
+            "weight": 10,
+            "muscles": 10,
+            "hp_max": 100,
+            "hp": 100,
+            "attack": 15,
+            "defense": 12
+        }, {
+            "user": "public",
+            "first_name": "Harper",
+            "last_name": "Parker",
+            "age": 22,
+            "sex": "F",
+            "height": 40,
+            "weight": 20,
+            "muscles": 20,
+            "hp_max": 100,
+            "hp": 100,
+            "attack": 15,
+            "defense": 12
+        }, {
+            "user": "public",
+            "first_name": "Glenn",
+            "last_name": "May",
+            "age": 28,
+            "sex": "M",
+            "height": 30,
+            "weight": 40,
+            "muscles": 40,
+            "hp_max": 100,
+            "hp": 100,
+            "attack": 15,
+            "defense": 12
+        }, {
+            "user": "public",
+            "first_name": "Sidney",
+            "last_name": "Grant",
+            "age": 19,
+            "sex": "F",
+            "height": 30,
+            "weight": 20,
+            "muscles": 45,
+            "hp_max": 100,
+            "hp": 100,
+            "attack": 15,
+            "defense": 12
+        }, {
+            "user": "public",
+            "first_name": "Reed",
+            "last_name": "Khan",
+            "age": 28,
+            "sex": "M",
+            "height": 95,
+            "weight": 75,
+            "muscles": 70,
+            "hp_max": 100,
+            "hp": 100,
+            "attack": 15,
+            "defense": 12
+        }, {
+            "user": "public",
+            "first_name": "Chris",
+            "last_name": "May",
+            "age": 44,
+            "sex": "M",
+            "height": 40,
+            "weight": 60,
+            "muscles": 40,
+            "hp_max": 100,
+            "hp": 100,
+            "attack": 15,
+            "defense": 12
+        }, {
+            "user": "public",
+            "first_name": "Terry",
+            "last_name": "Banks",
+            "age": 26,
+            "sex": "M",
+            "height": 80,
+            "weight": 10,
+            "muscles": 100,
+            "hp_max": 100,
+            "hp": 100,
+            "attack": 15,
+            "defense": 12
+        }, {
+            "user": "public",
+            "first_name": "Ali",
+            "last_name": "Murray",
+            "age": 25,
+            "sex": "F",
+            "height": 50,
+            "weight": 40,
+            "muscles": 70,
+            "hp_max": 100,
+            "hp": 100,
+            "attack": 15,
+            "defense": 12
+        }, {
+            "user": "public",
+            "first_name": "Gail",
+            "last_name": "Park",
+            "age": 36,
+            "sex": "F",
+            "height": 50,
+            "weight": 50,
+            "muscles": 20,
+            "hp_max": 100,
+            "hp": 100,
+            "attack": 15,
+            "defense": 12
+        }, {
+            "user": "public",
+            "first_name": "Ray",
+            "last_name": "Pittman",
+            "age": 42,
+            "sex": "M",
+            "height": 40,
+            "weight": 100,
+            "muscles": 0,
+            "hp_max": 100,
+            "hp": 100,
+            "attack": 15,
+            "defense": 12
+        }
     ]
 }

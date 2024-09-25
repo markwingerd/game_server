@@ -43,8 +43,12 @@ class Character(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='characters')
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+
     age = models.PositiveIntegerField()
     sex = models.CharField(max_length=1, choices=SEX_CHOICES)
+    height = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    weight = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    muscles = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
 
     hp_max = models.IntegerField(default=100, validators=[MinValueValidator(1), MaxValueValidator(1000)])
     hp = models.IntegerField(default=100, validators=[MinValueValidator(0), MaxValueValidator(1000)])

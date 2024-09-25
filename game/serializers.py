@@ -7,6 +7,7 @@ class CharacterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Character
         fields = '__all__'
+        read_only_fields = ['user']  # Ensure user is not expected in POST request
 
 class ContentTagSerializer(serializers.ModelSerializer):
     class Meta:
