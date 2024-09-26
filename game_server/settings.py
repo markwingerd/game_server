@@ -37,7 +37,7 @@ CORS_ALLOW_CREDENTIALS = True  # For cookies or HTTP authentication
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'http://167.71.124.163',
+    '167.71.124.163',
 ]
 
 
