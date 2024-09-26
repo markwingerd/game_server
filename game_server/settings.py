@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-nq6@7#mw2^wdcg#8b%_%sq)7b^mh7-ikk#tx)0hv%2!(gs1wp+
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8000'
+    'http://localhost:8000',
 ]
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https://\w+\.yourdomain\.com$",
@@ -39,6 +39,10 @@ CORS_ALLOW_CREDENTIALS = True  # For cookies or HTTP authentication
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
+    'lifeinparchment.com',
+    'www.lifeinparchment.com',
+    'lifeasparchment.com',
+    'www.lifeasparchment.com',
     '167.71.124.163',
     'localhost',
     '127.0.0.1',
